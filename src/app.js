@@ -25,22 +25,3 @@ const startServer = async () => {
 }
 
 startServer()
-
-// const activity = mongoose.model('Activity', {
-//     name:{
-//         type: String,
-//         required: true
-//     },
-//     status: {
-//         type: Boolean,
-//         default: false
-//     }
-
-// })
-// const activ = new activity({
-//     name: 'playing'
-// })
-
-// activ.save()
-//     .then(result => console.log(result))
-//     .catch(error => console.log(error))
