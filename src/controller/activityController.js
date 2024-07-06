@@ -3,7 +3,7 @@ import Activity from "../models/activity.js";
 export const getActivities = async (req, res, next) => {
     try {
         const activities = await Activity.find()
-        return res.status(200).json({ activities })
+        return res.status(200).json(activities)
     } catch (error) {
         // return res.status(400).json({ message: "fatal error", error: error.message })
         next(error)
@@ -14,7 +14,10 @@ export const getActivities = async (req, res, next) => {
 export const getActivity = async (req, res, next) => {
     try {
         const activity = await Activity.findById(req.params.id);
-        return res.status(200).json({ activity })
+        if (!activity) {
+            return res.status(404).json({ message: "Activity not found" });
+        }
+        return res.status(200).json(activity)
     } catch (error) {
         // return res.status(400).json({ message: "fatal error", error: error.message })
         next(error)
@@ -22,12 +25,16 @@ export const getActivity = async (req, res, next) => {
 }
 
 export const addActivity = async (req, res, next) => {
-    const { name, status } = req.body;
-    if(!name){
-        return res.status(400).json({ error: "error" })
+    const { name, description , status } = req.body;
+    if (!name || !description) {
+        return res.status(400).json({ error: "Name and description are required" });
     }
     try {
-        const activity = new Activity({ name, status });
+        const activity = new Activity({ 
+            name,
+            description,
+            status
+        });
         const addActivity = await activity.save()
         return res.status(200).json({ message: "Successfully created activity", addActivity})
     } catch (error) {
@@ -38,11 +45,12 @@ export const addActivity = async (req, res, next) => {
 
 export const updateActivity = async (req, res, next) => {
     const { id } = req.params;
-    const { name, status } = req.body;
+    const { name, description , status } = req.body;
 
     try {
         const updActivity = {
             name,
+            description,
             status
         }
         const updatedActivity = await Activity.findOneAndUpdate(
