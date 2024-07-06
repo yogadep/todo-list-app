@@ -20,7 +20,7 @@ const startServer = async () => {
             console.log(`server berjalan di port: ${PORT}`);
         })
     } catch (error) {
-        console.log('gagal terhubung ke database');
+        console.log('gagal terhubung ke server');
     }
 }
 
