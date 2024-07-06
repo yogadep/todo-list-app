@@ -3,7 +3,7 @@ import Activity from "../models/activity.js";
 export const getActivities = async (req, res, next) => {
     try {
         const activities = await Activity.find()
-        return res.status(200).json({ message: "Success fetched activities", activities })
+        return res.status(200).json({ activities })
     } catch (error) {
         // return res.status(400).json({ message: "fatal error", error: error.message })
         next(error)
@@ -14,7 +14,7 @@ export const getActivities = async (req, res, next) => {
 export const getActivity = async (req, res, next) => {
     try {
         const activity = await Activity.findById(req.params.id);
-        return res.status(200).json({ message: "Success fetched activity", activity })
+        return res.status(200).json({ activity })
     } catch (error) {
         // return res.status(400).json({ message: "fatal error", error: error.message })
         next(error)
@@ -29,7 +29,7 @@ export const addActivity = async (req, res, next) => {
     try {
         const activity = new Activity({ name, status });
         const addActivity = await activity.save()
-        return res.status(200).json({ message: "Success created activity", addActivity})
+        return res.status(200).json({ message: "Successfully created activity", addActivity})
     } catch (error) {
         // return res.status(400).json({ error: error.message })
         next(error)
@@ -50,7 +50,7 @@ export const updateActivity = async (req, res, next) => {
             { $set: updActivity },
             { new: true }
         );
-        return res.status(200).json({ message: "Success updated activity", updatedActivity})
+        return res.status(200).json({ message: "Successfully updated activity", updatedActivity})
     } catch (error) {
         // return res.status(400).json({ message: "fatal error", error: error.message })   
         next(error)
@@ -61,7 +61,7 @@ export const deleteActivity = async (req, res, next) => {
     const { id } = req.params;
     try {
         const delActivity = await Activity.findOneAndDelete({ _id: id })
-        return res.status(200).json({ message: "Success deleted activity", delActivity })
+        return res.status(200).json({ message: "Successfully deleted activity", delActivity })
     } catch (error) {
         // return res.status(400).json({ message: "fatal error", error: error.message });
         next(error)
