@@ -1,6 +1,7 @@
 import express from "express";
 import { activityRouter } from "./routes/activityRouter.js";
 import { userRouter } from "./routes/userRoutes.js";
+import { loginRouter } from "./routes/loginRoutes.js";
 import { connect } from "./library/db.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
@@ -11,7 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); 
 
 app.use('/activities', activityRouter);
-app.use('/user', userRouter)
+app.use('/user', userRouter);
+app.use('/auth', loginRouter);
 
 app.use(errorHandler);
 
