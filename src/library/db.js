@@ -9,7 +9,7 @@ export const connect = async (req, res) => {
     try {
         await mongoose.connect(url)
     } catch (error) {
-        console.log('gagal terhubung ke database');
+        console.log("Failed to connect to the database");
         throw error;
     }
-}
+};

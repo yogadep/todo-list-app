@@ -19,8 +19,8 @@ export const login = async (req, res, next) => {
         
             return res.status(200).json({ token })
         }
-        return res.status(400).json({ error: "username/password salah" });  
+        return res.status(400).json({ error: "Username or password is wrong" });  
     } catch (error) {
         next(error)
     }
-}
+};

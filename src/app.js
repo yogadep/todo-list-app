@@ -21,10 +21,10 @@ const startServer = async () => {
     try {
         await connect();
         app.listen(PORT, ()=>{
-            console.log(`server berjalan di port: ${PORT}`);
+            console.log(`Server is running on port : ${PORT}`);
         })
     } catch (error) {
-        console.log('gagal terhubung ke server');
+        console.log('Failed to connect to the server');
     }
 }
 

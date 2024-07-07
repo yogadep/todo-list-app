@@ -5,10 +5,9 @@ export const getActivities = async (req, res, next) => {
         const activities = await Activity.find()
         return res.status(200).json(activities)
     } catch (error) {
-        // return res.status(400).json({ message: "fatal error", error: error.message })
         next(error)
     }
-}
+};
 
 
 export const getActivity = async (req, res, next) => {
@@ -18,16 +17,15 @@ export const getActivity = async (req, res, next) => {
             return res.status(404).json({ message: "Activity not found" });
         }
         return res.status(200).json(activity)
-    } catch (error) {
-        // return res.status(400).json({ message: "fatal error", error: error.message })
+    } catch (error) { 
         next(error)
     }
-}
+};
 
 export const addActivity = async (req, res, next) => {
     const { title, description , status } = req.body;
     if (!title || !description) {
-        return res.status(400).json({ error: "title and description are required" });
+        return res.status(400).json({ error: "Title and description are required" });
     }
     try {
         const activity = new Activity({ 
@@ -38,10 +36,9 @@ export const addActivity = async (req, res, next) => {
         const addActivity = await activity.save()
         return res.status(201).json({ message: "Successfully created activity", addActivity})
     } catch (error) {
-        // return res.status(400).json({ error: error.message })
         next(error)
     }
-}
+};
 
 export const updateActivity = async (req, res, next) => {
     const { id } = req.params;
@@ -62,11 +59,10 @@ export const updateActivity = async (req, res, next) => {
             return res.status(404).json({ message: "Activity not found" });
         }
         return res.status(200).json({ message: "Successfully updated activity", updatedActivity})
-    } catch (error) {
-        // return res.status(400).json({ message: "fatal error", error: error.message })   
+    } catch (error) {  
         next(error)
     }
-}
+};
 
 export const deleteActivity = async (req, res, next) => {
     const { id } = req.params;
@@ -77,9 +73,8 @@ export const deleteActivity = async (req, res, next) => {
         }
         return res.status(200).json({ message: "Successfully deleted activity", delActivity })
     } catch (error) {
-        // return res.status(400).json({ message: "fatal error", error: error.message });
         next(error)
     }
-}
+};
 
 
