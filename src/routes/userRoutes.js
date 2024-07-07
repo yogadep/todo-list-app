@@ -1,8 +1,17 @@
 import { Router } from "express";
-import { getUser, addUser } from "../controller/userController.js";
+import { getUsers,
+         getUser,
+         addUser,
+         updateUser,
+         deleteUser,
+} from "../controller/userController.js";
 
 export const userRouter = Router();
 
 userRouter
-    .get('/', getUser)
+    .get('/', getUsers)
     .post('/', addUser);
+userRouter
+    .get('/:id', getUser)
+    .put('/:id', updateUser)
+    .delete('/:id', deleteUser)
