@@ -3,7 +3,6 @@ import bcrypt from "bcrypt";
 import User from "../models/user.js";
 
 export const login = async (req, res, next) => {
-    // const { id } = req.params;
     const { username, password } = req.body;
     try {
         let user = await User.findOne({ username });
@@ -17,6 +16,7 @@ export const login = async (req, res, next) => {
                 process.env.secret,
                 { expiresIn: '1h' }
             );
+        
             return res.status(200).json({ token })
         }
         return res.status(400).json({ error: "username/password salah" });  

@@ -5,7 +5,7 @@ export const getUsers = async (req, res, next) => {
         const users = await User.find()
         return res.status(200).json(users)
     } catch (error) {
-        
+        next(error)
     }
 };
 
@@ -33,7 +33,7 @@ export const addUser = async (req, res, next) => {
             password
         });
         const addUser = await newUser.save();
-        return res.status(200).json({ message: "Successfully added user", addUser })
+        return res.status(201).json({ message: "Successfully added user", addUser })
     } catch (error) {
         next(error)
     }
@@ -53,6 +53,9 @@ export const updateUser = async (req, res, next) => {
             { $set: user },
             { new: true }
         );
+        if(!updateUser){
+            return res.status(404).json({ message: "User not found" });
+        }
         return res.status(200).json({ message: "Successfully added user", updatedUser })
     } catch (error) {
         next(error)
@@ -63,6 +66,9 @@ export const deleteUser = async (req, res, next) => {
     const { id } = req.params;
     try {
         const delUser = await User.findOneAndDelete({ _id: id });
+        if(!delUser){
+            return res.status(404).json({ message: "User not found" });
+        }
         return res.status(200).json({ message: "Successfully deleted user", delUser })
     } catch (error) {
         next(error)   
