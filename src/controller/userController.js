@@ -43,20 +43,16 @@ export const updateUser = async (req, res, next) => {
     const { id } = req.params;
     const { name, username, password } = req.body;
     try {
-        const user = {
-            name,
-            username,
-            password
-        };
+        
         const updatedUser = await User.findOneAndUpdate(
             { _id: id },
-            { $set: user },
+            { name, username, password },
             { new: true }
         );
         if(!updateUser){
             return res.status(404).json({ message: "User not found" });
         }
-        return res.status(200).json({ message: "Successfully added user", updatedUser })
+        return res.status(200).json({ message: "Successfully updated user", updatedUser })
     } catch (error) {
         next(error)
     }
