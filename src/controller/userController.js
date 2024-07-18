@@ -43,7 +43,6 @@ export const updateUser = async (req, res, next) => {
     const { id } = req.params;
     const { name, username, password } = req.body;
     try {
-        
         const updatedUser = await User.findOneAndUpdate(
             { _id: id },
             { name, username, password },
