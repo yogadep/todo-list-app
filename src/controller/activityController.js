@@ -1,9 +1,11 @@
 import Activity from "../models/activity.js";
+import { successRes } from "../middleware/responseHelper.js";
 
 export const getActivities = async (req, res, next) => {
     try {
         const activities = await Activity.find()
-        return res.status(200).json(activities)
+        // return res.status(200).json(activities)
+        return successRes(res, 200, "Activities retrieved successfully", activities )
     } catch (error) {
         next(error)
     }
