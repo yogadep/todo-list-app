@@ -20,7 +20,7 @@ export const getActivity = async (req, res, next) => {
             return errorRes(res, 404, "Activity not found")
         }
         // return res.status(200).json(activity)
-        return successRes(res, 200, "Activities successfully showing", activity)
+        return successRes(res, 200, "Activity successfully showing", activity)
     } catch (error) { 
         next(error)
     }
@@ -29,7 +29,8 @@ export const getActivity = async (req, res, next) => {
 export const addActivity = async (req, res, next) => {
     const { title, description , status } = req.body;
     if (!title || !description) {
-        return res.status(400).json({ error: "Title and description are required" });
+        // return res.status(400).json({ error: "Title and description are required" });
+        return errorRes(res, 400, "Title and description are required")
     }
     try {
         const activity = new Activity({ 
@@ -38,7 +39,8 @@ export const addActivity = async (req, res, next) => {
             status
         });
         const addActivity = await activity.save()
-        return res.status(201).json({ message: "Successfully created activity", addActivity})
+        // return res.status(201).json({ message: "Successfully created activity", addActivity})
+        return successRes(res, 200, "Successfully created activity", addActivity)
     } catch (error) {
         next(error)
     }
