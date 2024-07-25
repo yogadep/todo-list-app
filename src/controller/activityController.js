@@ -1,5 +1,5 @@
 import Activity from "../models/activity.js";
-import { successRes } from "../middleware/responseHelper.js";
+import { successRes, errorRes } from "../middleware/responseHelper.js";
 
 export const getActivities = async (req, res, next) => {
     try {
@@ -16,9 +16,11 @@ export const getActivity = async (req, res, next) => {
     try {
         const activity = await Activity.findById(req.params.id);
         if (!activity) {
-            return res.status(404).json({ message: "Activity not found" });
+            // return res.status(404).json({ message: "Activity not found" });
+            return errorRes(res, 404, "Activity not found")
         }
-        return res.status(200).json(activity)
+        // return res.status(200).json(activity)
+        return successRes(res, 200, "Activities successfully showing", activity)
     } catch (error) { 
         next(error)
     }
