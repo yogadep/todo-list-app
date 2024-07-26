@@ -77,9 +77,11 @@ export const deleteActivity = async (req, res, next) => {
     try {
         const delActivity = await Activity.findOneAndDelete({ _id: id })
         if(!delActivity){
-            return res.status(404).json({ message: "Activity not found" });
+            // return res.status(404).json({ message: "Activity not found" });
+            return errorRes(res, 404, "Activity not found");
         }
-        return res.status(200).json({ message: "Successfully deleted activity", delActivity })
+        // return res.status(200).json({ message: "Successfully deleted activity", delActivity })
+        return successRes(res, 200, "Successfully deleted activity", delActivity);
     } catch (error) {
         next(error)
     }
