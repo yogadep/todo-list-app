@@ -22,9 +22,7 @@ const userSchema = new Schema(
             transform(doc, ret){
                 delete ret.password;
             }
-        }
-    },
-    {
+        },
         timestamps: true
     }
 );
