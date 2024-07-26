@@ -62,9 +62,11 @@ export const updateActivity = async (req, res, next) => {
             { new: true }
         );
         if(!updatedActivity){
-            return res.status(404).json({ message: "Activity not found" });
+            // return res.status(404).json({ message: "Activity not found" });
+            return errorRes(res, 404, "Activity not found");
         }
-        return res.status(200).json({ message: "Successfully updated activity", updatedActivity})
+        // return res.status(200).json({ message: "Successfully updated activity", updatedActivity})
+        return successRes(res, 200, "Successfully updated activity", updatedActivity)
     } catch (error) {  
         next(error)
     }
